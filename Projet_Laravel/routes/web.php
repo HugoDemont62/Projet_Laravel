@@ -15,3 +15,5 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [FirstController::class, 'index']);
+Route::get('/about', [FirstController::class, 'about']);
+Route::get('/article/{id}', [FirstController::class, 'article'])->where('id','[0-9]+');

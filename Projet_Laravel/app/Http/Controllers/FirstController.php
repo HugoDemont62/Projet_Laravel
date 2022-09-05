@@ -10,4 +10,13 @@ class FirstController extends Controller{
        // return back();
        // return redirect("/article");
     }
+    public function about(){
+        return view('about');
+
+    }
+    public function article($id){
+        return view('article', ["id"=>$id]);
+
+    }
+
 }
