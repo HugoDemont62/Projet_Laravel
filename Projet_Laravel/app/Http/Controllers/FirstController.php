@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class FirstController extends Controller{
     public function index(){
         return view('index');
+
        // return back();
        // return redirect("/article");
     }
