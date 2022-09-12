@@ -1,8 +1,12 @@
 Yes
 <br>
 C cool
-{{$users = DB::select('SELECT * FROM film')}}
+
 <a href="/about">
     About
+</a>
+<br>
+<a href="/films">
+    Voir la liste des films
 </a>
 <?php
