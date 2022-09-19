@@ -30,12 +30,33 @@ class FirstController extends Controller{
 
     }
     public function film($id){
-        return view('film', ["id"=>$id]);
+        $film = DB::select("SELECT * FROM film WHERE id=?", [$id]);
+        if (count($film)==0){
+            abort("404");
+        }
+        $film = $film[0];
+        if ($film->idRealisateur != null){
+            $real = DB::select("SELECT * FROM personne WHERE id = ?",[$film->idRealisateur]);
+            $real = $real[0];
+        }else{
+            $real = false;
+        }
+
+        return view('film', ["film"=>$film, "realisateur"=>$real]);
 
     }
     public function personne($id){
         $personne = DB::select("SELECT * FROM personne WHERE id = $id");
-        return view('personne', ["id"=>$id, "personne" => $personne]);
+        if (count($personne)==0){
+            abort("404");
+        }
+        $personne = $personne[0];
+        if ($personne->id != null){
+            $directed = DB::select("SELECT * FROM film WHERE idRealisateur = ?",[$personne->id]);
+        }else{
+            $directed = false;
+        }
+        return view('personne', ["personne"=>$personne, "directed"=>$directed]);
 
     }
 

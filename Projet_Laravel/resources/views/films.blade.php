@@ -2,8 +2,11 @@
 <a href="/personnes">Voir toutes les personnes</a>
 
 
+<ul>
+    @foreach($films as $film)
+        <li>
+            <a href="/film/{{$film->id}}">{{$film->titre}}</a>
+        </li>
+    @endforeach
 
-@foreach($films as $film)
-    <br>
-    <a href="/film/{{$film->id}}">{{$film->titre}}</a>
-@endforeach
+</ul>
