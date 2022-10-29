@@ -21,3 +21,4 @@ Route::get('/films', [FirstController::class,'films']);
 Route::get('/film/{id}', [FirstController::class, 'film'])->where('id','[0-9]+');
 Route::get('/personnes', [FirstController::class,'personnes']);
 Route::get('/personne/{id}', [FirstController::class, 'personne'])->where('id','[0-9]+');
+Route::get('/personne/{id}', [FirstController::class, 'personne'])->where('id','[0-9]+');Route::get('/personne/{id}', [FirstController::class, 'personne'])->where('id','[0-9]+');Route::get('/personne/{id}', [FirstController::class, 'personne'])->where('id','[0-9]+');
