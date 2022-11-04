@@ -7,6 +7,5 @@
             <a href="/personne/{{$personne->id}}">{{$personne->nom . " ". $personne->prenom}}</a>
         </li>
     @endforeach
-
 </ul>
 

@@ -2,62 +2,76 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Film;
+use App\Models\Joue;
+use App\Models\Personne;
+use App\Models\Genre;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class FirstController extends Controller{
+class FirstController extends Controller
+{
     public function index(){
+        //$f = new Film();
+        //$f->titre = "Le film de l'annee";
+        //$f->annee = 2022;
+        //$f->nbSpectateurs = 1000;
+        //$f->save();
+
+        //$f = Film::findOrFail(38);
+        //$f->delete();
+        //dd($f);
+
+        //$f = Film::findOrFail(39);
+        //$f->nbSpectateurs = 99990;
+        //$f->save();
+        //dd($f);
+
+        //$film = Film::all();
+        //dd($film);
+        //die(1);
+
+        //$f = Film::find(27);
+        //echo $f->realisateur->nom;
+
+
         return view('index');
-       // return back();
-       // return redirect("/article");
+        // return back();
+        // return redirect("/article");
     }
+
     public function about(){
         return view('about');
-
     }
+
     public function films(){
-        $films = DB::select("SELECT * FROM film");
+        //$films = Film::whereRaw("annee > 2000")->orderBy("nbSpectateurs")->get();
+        $films = Film::all();
         return view('films', ["films" => $films]);
-
     }
+
     public function personnes(){
-        $personnes = DB::select("SELECT * FROM personne");
+        $personnes = Personne::all();
         return view('personnes', ["personnes" => $personnes]);
-
     }
-    public function article($id){
-        return view('article', ["id"=>$id]);
 
-    }
     public function film($id){
-        $film = DB::select("SELECT * FROM film WHERE id=?", [$id]);
-        if (count($film)==0){
-            abort("404");
-        }
-        $film = $film[0];
-        if ($film->idRealisateur != null){
-            $real = DB::select("SELECT * FROM personne WHERE id = ?",[$film->idRealisateur]);
-            $real = $real[0];
-        }else{
+        $film = Film::findOrFail($id);
+        if ($film->idRealisateur != null) {
+            $real = $film->realisateur;
+        } else {
             $real = false;
         }
-
-        return view('film', ["film"=>$film, "realisateur"=>$real]);
-
+        return view('film', ["film" => $film, "realisateur" => $real]);
     }
+
     public function personne($id){
-        $personne = DB::select("SELECT * FROM personne WHERE id = $id");
-        if (count($personne)==0){
-            abort("404");
-        }
-        $personne = $personne[0];
-        if ($personne->id != null){
-            $directed = DB::select("SELECT * FROM film WHERE idRealisateur = ?",[$personne->id]);
-        }else{
+        $personne = Personne::findOrFail($id);
+        if ($personne->id != null) {
+            $directed = $personne->realisation;
+        } else {
             $directed = false;
         }
-        return view('personne', ["personne"=>$personne, "directed"=>$directed]);
-
+        return view('personne', ["personne" => $personne, "directed" => $directed]);
     }
-
 }
