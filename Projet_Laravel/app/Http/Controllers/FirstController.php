@@ -44,34 +44,33 @@ class FirstController extends Controller
         return view('about');
     }
 
+    public function genres(){
+        return view('genres', ["genres"=>Genre::all()]);
+    }
+    public function genre($id){
+        $genre = Genre::findOrFail($id);
+        return view('genre',["genre"=>$genre]);
+    }
+
     public function films(){
         //$films = Film::whereRaw("annee > 2000")->orderBy("nbSpectateurs")->get();
-        $films = Film::all();
-        return view('films', ["films" => $films]);
+        return view('films', ["films" => Film::all()]);
+    }
+    public function film($id){
+        $film = Film::findOrFail($id);
+        return view('film', ["film" => $film]);
     }
 
     public function personnes(){
         $personnes = Personne::all();
         return view('personnes', ["personnes" => $personnes]);
     }
-
-    public function film($id){
-        $film = Film::findOrFail($id);
-        if ($film->idRealisateur != null) {
-            $real = $film->realisateur;
-        } else {
-            $real = false;
-        }
-        return view('film', ["film" => $film, "realisateur" => $real]);
-    }
-
     public function personne($id){
         $personne = Personne::findOrFail($id);
-        if ($personne->id != null) {
-            $directed = $personne->realisation;
-        } else {
-            $directed = false;
-        }
-        return view('personne', ["personne" => $personne, "directed" => $directed]);
+        return view('personne', ["personne" => $personne]);
     }
+
+
+
+
 }

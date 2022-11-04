@@ -4,7 +4,7 @@
 <ul>
     @foreach($personnes as $personne)
         <li>
-            <a href="/personne/{{$personne->id}}">{{$personne->nom . " ". $personne->prenom}}</a>
+            <a href="/personne/{{$personne->id}}">{{$personne->prenom . " ". $personne->nom}}</a>
         </li>
     @endforeach
 </ul>

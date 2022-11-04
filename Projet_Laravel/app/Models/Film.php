@@ -16,6 +16,10 @@ class Film extends Model
         return $this->belongsTo(Personne::class, 'idRealisateur');
     }
 
+    public function acteurs(){
+        return $this->belongsToMany(Personne::class, 'joue', 'idFilm', 'idActeur');
+    }
+
 
 
 }
